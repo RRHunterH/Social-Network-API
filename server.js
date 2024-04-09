@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/userRoutes');
-const thoughtRoutes = require('./routes/thoughtRoutes');
-const dbConfig = require('./config/db');
+const userRoutes = require('./routes/api/userRoutes');
+const thoughtRoutes = require('./routes/api/thoughtRoutes');
+const dbConfig = require('./config/connection');
 
 const app = express();
 app.use(express.json());
