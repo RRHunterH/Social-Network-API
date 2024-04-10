@@ -1,14 +1,14 @@
 const router = require("express").Router();
 
 const {
-  getAllUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
-  addFriend,
-  removeFriend,
-} = require("../../controller/userController");
+    getAllThoughts,
+    getThoughtById,
+    createThought,
+    updateThought,
+    deleteThought,
+    addReaction,
+    deleteReaction,
+  } = require("../../controller/thoughtController");  
 
 router.route("/")
   .get(getAllUsers)

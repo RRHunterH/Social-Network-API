@@ -1,18 +1,28 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const userRoutes = require('./routes/api/userRoutes');
-const thoughtRoutes = require('./routes/api/thoughtRoutes');
-const dbConfig = require('./config/connection');
+const router = require("express").Router();
 
-const app = express();
-app.use(express.json());
+const {
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+  addFriend,
+  removeFriend,
+} = require("controller/userController");
 
-mongoose.connect(dbConfig.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+router.route("/")
+  .get(getAllUsers)
+  .post(createUser);
 
-app.use('/api/users', userRoutes);
-app.use('/api/thoughts', thoughtRoutes);
+router.route("/:userId")
+  .get(getUserById)
+  .put(updateUser)
+  .delete(deleteUser);
 
-const PORT = process.env.PORT || 3002;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+router.route("/:userId/friends")
+  .post(addFriend);
+
+router.route("/:userId/friends/:friendId")
+  .delete(removeFriend);
+
+module.exports = router;
